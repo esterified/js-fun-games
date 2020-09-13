@@ -1,0 +1,124 @@
+
+  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
+</head>
+<body>
+<canvas id = "gameCanvas" width="800" height="600"></canvas>
+
+<script>
+var canvas;
+var canvasContext;
+
+// ball variables
+var ballX = 75;
+var ballY = 75;
+var ballSpeedX = 6;
+var ballSpeedY = 6;
+var ballRadius = 10;
+
+// paddle variables
+var paddle1X = 400;
+const Paddle_Width = 100;
+const Paddle_Height = 10;
+
+window.onload = function() {
+	// save the canvas dimensions, and its 2d context for drawing it.
+	canvas = document.getElementById('gameCanvas');
+	canvasContext = canvas.getContext('2d');
+
+	// set frames per second
+	var FramesPerSecond = 30;
+
+	// use mousemove event to call the calculateMousePos function and then use its
+	// x position to update paddle1X
+
+	canvas.addEventListener('mousemove', function(evt) {
+		var mousePos = calculateMousePos(evt);
+		paddle1X = mousePos.x - (Paddle_Width / 2);
+	});
+
+	// call the draw and move functions 30 times per second(1000ms)
+	setInterval(function() {
+		moveEverything();
+		drawEverything();
+	}, 1000 / FramesPerSecond);
+}
+
+function colorRect (topLeft, topRight, boxWidth, boxHeight, fillColor) {
+	canvasContext.fillStyle = fillColor;
+	canvasContext.fillRect (topLeft, topRight, boxWidth, boxHeight);
+}
+
+function colorCircle (centerX, centerY, radius, fillColor) {
+	canvasContext.fillStyle = fillColor;
+	canvasContext.beginPath();
+	canvasContext.arc(centerX, centerY, radius, 0, Math.PI * 2, true);
+	canvasContext.fill();
+}
+
+function calculateMousePos (evt) {
+	var rect = canvas.getBoundingClientRect(), root = document.documentElement;
+
+	// account for the margins, canvas position on page, scroll amount, etc.
+	var mouseX = evt.clientX - rect.left - root.scrollLeft;
+	var mouseY = evt.clientY - rect.top - root.scrollTop;
+	return {
+		x: mouseX,
+		y: mouseY
+	};
+}
+
+function resetBall () {
+	ballX = 75;
+	ballY = 75;
+}
+
+function moveEverything() {
+	// update the balls position to the right and down by a small amount
+	ballX += ballSpeedX;
+	ballY += ballSpeedY;
+
+	// if the ball moves past the right edge of the canvas make it reverse
+	if (ballX > canvas.width) {
+		ballSpeedX *= -1;
+	}
+
+ 	// if the ball moves past the right edge of the canvas make it reverse
+ 	if (ballX < 0) {
+ 		ballSpeedX *= -1;
+ 	}
+	// if the ball hits paddle then reverse direction otherwise reset the ball
+ 	if (ballY > canvas.height) {
+ 		if (ballX >= paddle1X  && ballX <= paddle1X + Paddle_Width) {
+ 			ballSpeedY *= -1;
+ 		} else {
+ 			resetBall();
+ 		}
+ 	}
+	// if the ball moves past the top edge of the canvas make it reverse
+ 	if (ballY < 0) {
+ 		ballSpeedY *= -1;
+ 	}
+
+
+}
+
+function drawEverything() {
+	// clear the game view by calling colorRect function and filling it with black
+	colorRect(0, 0, canvas.width, canvas.height, 'black');
+	
+	// draw a white circle
+	colorCircle(ballX, ballY, ballRadius, 'white');
+	
+	// draw the paddle at bottom of play area
+	colorRect(paddle1X, canvas.height - Paddle_Height, Paddle_Width, Paddle_Height, 'white');
+}
+</script>
+	
+</body>
+</html>
+

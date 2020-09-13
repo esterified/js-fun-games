@@ -1,0 +1,39 @@
+
+<html>
+<head>
+<style>
+body {
+  height: 600px;
+  width: 600px;
+}
+
+button {
+  position: fixed;
+}
+</style>
+</head>
+<body>
+
+<p>Click the button to scroll the contents of body.</p>
+
+<p><strong>Tip:</strong> Click the button many times to scroll the same amount each time.</p>
+
+<button onclick="myFunction()">Scroll contents of body</button><br><br>
+
+<script>
+	var h = document.documentElement;
+	window.onscroll = function(){
+		console.log(h.scrollTop);
+	}
+function myFunction() {
+  var body = document.body; // For Safari
+  var html = document.documentElement; // Chrome, Firefox, IE and Opera places the overflow at the html level, unless else is specified. Therefore, we use the documentElement property for these browsers
+  body.scrollLeft += 30;
+  body.scrollTop += 10;
+  html.scrollLeft += 30;
+  html.scrollTop += 10;
+}
+</script>
+
+</body>
+</html>

@@ -143,6 +143,7 @@ return {
     colorRect(canvas.width-P_WIDTH, paddleY2,P_WIDTH,P2_HEIGHT,'white');
     canvasContext.drawImage(ballPic,posX,posY,ballWidth,ballHeight) ;
     //colorCircle(posX, posY, ballWidth*2 , 'white');
+    canvasContext.font = "30px Verdana";    
     canvasContext.fillText(player1Score,20,30);
     canvasContext.fillText(player2Score,canvas.width-20,30);
 	}

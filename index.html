@@ -35,8 +35,8 @@
 	window.addEventListener('resize', resizeCanvas, false);
 
 	function resizeCanvas() {
-	canvas.width = window.innerWidth;
-	canvas.height = window.innerHeight;	
+	canvas.width = window.innerWidth-16;
+	canvas.height = window.innerHeight-16;	
 	}
 	resizeCanvas();		    
    canvas.onclick = function() {  

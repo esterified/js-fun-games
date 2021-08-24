@@ -3,12 +3,14 @@
 
 <canvas id="gameCanvas" width="800" height="600">Your browser does not support the HTML5 canvas tag.</canvas>
 <script>
-	var canvas;
-	var canvasContext;
-	//var ballHeight=10;
-	var matchEnd=false;
-	var player1Score=0;
-	var player2Score=0;
+    document.getElementById("myImg").style.height = screen.height+"px";
+    document.getElementById("myImg").style.width = screen.width+"px";		
+    var canvas;
+    var canvasContext;
+    //var ballHeight=10;
+    var matchEnd=false;
+    var player1Score=0;
+    var player2Score=0;
     var ballWidth=ballHeight=10;
     var posX=100;
     var posY=100;
@@ -21,19 +23,19 @@
     const P_WIDTH=10;
     const W_SCORE=20;
     //adding graphical image to ball START
-var ballPic=document.createElement("img");
- ballPic.src="Ball.png";
- //adding graphical image to ball END
+    var ballPic=document.createElement("img");
+    ballPic.src="Ball.png";
+    //adding graphical image to ball END
     window.onload = function(){
    canvas = document.getElementById("gameCanvas");
 
    canvasContext = canvas.getContext("2d");
    canvas.onclick = function() {  
- if(matchEnd){
- 	player1Score=0;
- 	player2Score=0;
- 	matchEnd=false;
- }
+	 if(matchEnd){
+		player1Score=0;
+		player2Score=0;
+		matchEnd=false;
+	 }
   
    };
    canvas.onmousemove = function(er) {  
